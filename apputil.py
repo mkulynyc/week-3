@@ -89,3 +89,39 @@ def task_1():
     cols = df_bellevue.columns.tolist()
     print("Missing gender data was stored as ?, g, or h. These have been replaced with NaN")
     return cols
+
+
+def task_2():
+    """
+    This function returns a dataframe with two columns: year and count.
+    The year column contains the years found in the date_in column of the 
+    dataset, and the count column contains the number of entries for each year.
+    The years had to be extracted from the date_in column first.
+    They were stored in YYYY-MM-DD format, so we extracted the year using pandas.
+    
+
+    Arguments:
+    - None
+
+    Returns:
+    - A dataframe with two columns: year and count.
+    
+    """
+    # Load the dataset
+    url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
+    df_bellevue = pd.read_csv(url)
+
+    # Get the years in the date_in column
+    df_bellevue['date_in'] = pd.to_datetime(df_bellevue['date_in'], errors='coerce')
+
+    # Count the number of entries for each year
+    year_counts = df_bellevue['date_in'].dt.year.value_counts().sort_index()
+
+    # Return as a dataframe
+    year_df = pd.DataFrame({
+        "year": year_counts.index,
+        "total_admissions": year_counts.values
+    })
+    return(year_df)
+
+
