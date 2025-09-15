@@ -52,3 +52,40 @@ def to_binary(x):
     else:
         return to_binary(x // 2) + str(x % 2)
     
+
+""" Exercise 3 """
+def task_1():
+    """
+    This function returns a list of the column names in the dataframe 
+    sorted by the number of missing values (NA) in each column, from least to most.
+    It first fixes the issue in the gender column on how missing data was stored.
+
+    Arguments:
+    - None
+
+    Returns:
+    - A sorted list of column names based on the number of missing values.
+    
+    """
+    # Load the dataset
+    url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
+    df_bellevue = pd.read_csv(url)
+
+
+    # Filter for the rows where gender should be missing
+    gender_filter = (df_bellevue['gender'] == '?') | \
+                    (df_bellevue['gender'] == 'g') | \
+                    (df_bellevue['gender'] == 'h') 
+
+    # Replace the incorrect values with NaN
+    df_bellevue.loc[gender_filter, 'gender'] = np.nan
+
+    # Get the NA counts per column, then create a sorting filter
+    na_counts = df_bellevue.isna().sum()
+    missing_sort = na_counts.sort_values()
+
+    # Apply this to the dataframe, then return a list of columns names
+    df_bellevue = df_bellevue[missing_sort.index]
+    cols = df_bellevue.columns.tolist()
+    print("Missing gender data was stored as ?, g, or h. These have been replaced with NaN")
+    return cols
