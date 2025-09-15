@@ -96,8 +96,7 @@ def task_2():
     This function returns a dataframe with two columns: year and count.
     The year column contains the years found in the date_in column of the 
     dataset, and the count column contains the number of entries for each year.
-    The years had to be extracted from the date_in column first.
-    They were stored in YYYY-MM-DD format, so we extracted the year using pandas.
+    The years had to be extracted first.
     
 
     Arguments:
@@ -113,6 +112,7 @@ def task_2():
 
     # Get the years in the date_in column
     df_bellevue['date_in'] = pd.to_datetime(df_bellevue['date_in'], errors='coerce')
+    print("Dates were stored in YYYY-MM-DD format. I extracted the year using pandas.")
 
     # Count the number of entries for each year
     year_counts = df_bellevue['date_in'].dt.year.value_counts().sort_index()
