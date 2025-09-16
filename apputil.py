@@ -125,3 +125,30 @@ def task_2():
     return(year_df)
 
 
+def task_3():
+    """
+    This function returns a series with the average age for each gender listed in the dataset.
+    It first groups the data by gender, then calculates the mean age for each group.
+
+    Arguments:
+    - None
+
+    Returns:
+    - A series with the average age for each gender.
+
+    """
+
+    # Load the dataset
+    url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
+    df_bellevue = pd.read_csv(url)
+
+    # Group the DF by gender and calculate the mean age for each    
+    avg_ages = df_bellevue.groupby('gender')['age'].mean()
+    print("I utilized the pandas groupby function to group the data by the gender, " \
+            "then calculated the mean for each")
+    return(avg_ages)
+
+
+
+
+
