@@ -1,5 +1,6 @@
 import seaborn as sns
 import pandas as pd
+import numpy as np
 
 """
 Exercise 1: Recursive Fibonacci Function
@@ -13,7 +14,7 @@ Returns:
 - The nth Fibonacci number.
 """
 
-def fib(n):
+def fibonacci(n):
     # Return 0 if n is 0
     if n <= 0:
         return 0
@@ -157,15 +158,15 @@ def task_4():
     - None
 
     Returns:
-    - A list of tuples with the 5 most common professions and their counts.
+    - A list with the 5 most common professions.
     """
     # Load the dataset
     url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
     df_bellevue = pd.read_csv(url)
 
-    # Get the 5 most common professions and their counts, return as a list
+    # Get the 5 most common professions return as a list
     prof_counts = df_bellevue['profession'].value_counts().head(5)
-    prof_list = list(zip(prof_counts.index, prof_counts.values))
+    prof_list = prof_counts.index.tolist()
     return(prof_list)
 
 
