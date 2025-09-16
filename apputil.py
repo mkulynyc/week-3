@@ -149,6 +149,23 @@ def task_3():
     return(avg_ages)
 
 
+def task_4():
+    """
+    This function returns a list of the 5 most common professions in the dataset.
 
+    Arguments:
+    - None
+
+    Returns:
+    - A list of tuples with the 5 most common professions and their counts.
+    """
+    # Load the dataset
+    url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
+    df_bellevue = pd.read_csv(url)
+
+    # Get the 5 most common professions and their counts, return as a list
+    prof_counts = df_bellevue['profession'].value_counts().head(5)
+    prof_list = list(zip(prof_counts.index, prof_counts.values))
+    return(prof_list)
 
 
