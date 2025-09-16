@@ -14,7 +14,7 @@ Returns:
 - The nth Fibonacci number.
 """
 
-def fibonacci(n):
+def fib(n):
     # Return 0 if n is 0
     if n <= 0:
         return 0
